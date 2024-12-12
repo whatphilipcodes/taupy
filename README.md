@@ -86,11 +86,3 @@ This template is supposed to help with the creation of desktop applications that
     ```bash
     pnpm install
     ````
-
-- **for docs maintenance only**
-
-    the docs are created as a separate react project with `./docs` as root folder
-    ```bash
-    pending
-    ```
-    
