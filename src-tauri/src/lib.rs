@@ -9,15 +9,13 @@ pub fn run() {
     let child_mutex = Arc::new(Mutex::new(None));
     let child_mutex_clone = child_mutex.clone();
 
-    let app = tauri::Builder::default()
+    tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
         .setup(move |app| {
             let sidecar_command = app.shell().sidecar("taupy-pyserver").unwrap();
             let (mut rx, child) = sidecar_command.spawn().expect("failed to spawn sidecar");
-
             // store the child in the mutex
             *child_mutex_clone.lock().unwrap() = Some(child);
-
             // print py output to rust console
             tauri::async_runtime::spawn(async move {
                 while let Some(event) = rx.recv().await {
@@ -35,31 +33,27 @@ pub fn run() {
             Ok(())
         })
         .build(tauri::generate_context!())
-        .expect("error while running tauri application");
-
-    app.run(move |_app_handle, event| match event {
-        RunEvent::Exit {} => {
-            if let Some(child) = child_mutex.lock().unwrap().take() {
-                let mut system = System::new_all();
-                system.refresh_all();
-
-                // find and kill the main process and its children
-                if let Some(process) = system.process(Pid::from(child.pid() as usize)) {
-                    let exe_path = process.exe();
-
-                    // kill the specific process first
-                    process.kill();
-
-                    // find and kill any related processes
-                    for (_, p) in system.processes() {
-                        if p.exe() == exe_path {
-                            p.kill();
+        .expect("error while building tauri application")
+        .run(move |_app_handle, event| match event {
+            RunEvent::Exit {} => {
+                if let Some(child) = child_mutex.lock().unwrap().take() {
+                    let mut system = System::new_all();
+                    system.refresh_all();
+                    // find and kill the main process and its children
+                    if let Some(process) = system.process(Pid::from(child.pid() as usize)) {
+                        let exe_path = process.exe();
+                        // kill the specific process first
+                        process.kill();
+                        // find and kill any related processes
+                        for (_, p) in system.processes() {
+                            if p.exe() == exe_path {
+                                p.kill();
+                            }
                         }
                     }
                 }
+                println!("exiting python backend...")
             }
-            println!("exiting python backend...")
-        }
-        _ => {}
-    });
+            _ => {}
+        });
 }
