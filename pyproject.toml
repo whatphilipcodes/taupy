@@ -1,0 +1,12 @@
+[tool.poetry]
+name = "TauPy"
+version = "0.1.0"
+description = "backend for your tauri app"
+authors = ["whatphilipcodes <gerdes.philip@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.14"
+pyinstaller = "^6.11.1"
+fastapi = { extras = ["standard"], version = "^0.115.5" }
