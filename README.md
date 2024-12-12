@@ -1,11 +1,12 @@
 # TauPy
-A template repository to get you started with tauri, react and a python backend API.
+This template is supposed to help with the creation of desktop applications that rely on a python backend. It uses [tauri](https://tauri.app/) for the main runtime and [react](https://react.dev/) for the frontend. The python environment is managed by [poetry](https://python-poetry.org/) and the frontend packages are managed by [pnpm](https://pnpm.io/). The project aims to be a scarce starting point to be easily transformed into the desired application.
 
 ### Features
-- **preset pipelines seamlessly hooking into `tauri dev` and `tauri build`**
-- **custom port manager to handle dev and build environments**
-- **built-in python env management via poetry**
-- **easy to understand folder structure**
+- preset pipelines seamlessly hooking into `tauri dev` and `tauri build`
+- custom port manager to handle dev and build environments
+- automatic process shutdown upon exiting the application
+- built-in python env management via poetry
+- easy to understand folder structure
 
 ### Prerequisites
 - **rust (tauri runtime)**
