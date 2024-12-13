@@ -1,13 +1,17 @@
-# import subprocess
+import sys
+import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
 
 PORT_API = 8008
 
+# Enable immediate prints in dev mode
+if "-dev" in sys.argv:
+    sys.stdout.reconfigure(line_buffering=True)
+
 app = FastAPI(
-    title="knoto-back-api",
-    version="1.0.0",
+    title="taupy-backend-api",
+    version="0.0.1",
 )
 
 # CORS config
@@ -31,7 +35,7 @@ async def favicon():
 @app.get("/")
 async def root():
     return {
-        "message": f"knoto backend api root. Head to 'http://localhost:{PORT_API}/docs' to test out routes in the browser."
+        "message": f"pyserver backend api root. Head to 'http://localhost:{PORT_API}/docs' to test out routes in the browser."
     }
 
 

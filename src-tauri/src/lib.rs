@@ -13,6 +13,11 @@ pub fn run() {
         .plugin(tauri_plugin_shell::init())
         .setup(move |app| {
             let sidecar_command = app.shell().sidecar("taupy-pyserver").unwrap();
+
+            // add -u flag in dev mode to disable output buffering for immediate print from python
+            #[cfg(debug_assertions)]
+            let sidecar_command = sidecar_command.arg("-dev");
+
             let (mut rx, child) = sidecar_command.spawn().expect("failed to spawn sidecar");
             // store the child in the mutex
             *child_mutex_clone.lock().unwrap() = Some(child);

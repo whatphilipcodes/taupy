@@ -1,12 +1,22 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { spawnSync } from 'child_process';
 
-// @ts-expect-error process is a nodejs global
+// using this plugin instead of adding the command to the tauri config prevents ecycle error in dev mode
+const runPyInstall = () => {
+  return {
+    name: 'run-pyinstall',
+    buildStart() {
+      spawnSync('pnpm', ['pyinstall'], { stdio: 'inherit' });
+    }
+  };
+};
+
 const host = process.env.TAURI_DEV_HOST;
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
-  plugins: [react()],
+  plugins: [runPyInstall(), react()],
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   //

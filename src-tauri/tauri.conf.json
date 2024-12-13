@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "identifier": "com.taupy.app",
   "build": {
-    "beforeDevCommand": "pnpm pyinstall && pnpm dev",
+    "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "pnpm pyinstall && pnpm build && ln -sfn './src-tauri/target' './dist-full'",
+    "beforeBuildCommand": "pnpm build && ln -sfn './src-tauri/target' './dist-full'",
     "frontendDist": "../dist-front"
   },
   "app": {
