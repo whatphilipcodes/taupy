@@ -1,7 +1,5 @@
-<div style="display: flex; align-items: center;">
-  <img src="./public/taupy.svg" alt="logo" width="80" style="transform: translateX(-8%);"/>
-  <h1 style="width: 100%; margin: 0;">TauPy</h1>
-</div>
+
+<h1><img src="./public/taupy.svg" alt="logo" width="80" align="center"/>&nbsp;&nbsp;&nbsp;TauPy</h1>
 
 This template is supposed to help with the creation of desktop applications that rely on a python backend. It uses [tauri](https://tauri.app/) for the main runtime and [react](https://react.dev/) for the frontend. The python environment is managed by [poetry](https://python-poetry.org/) and the frontend packages are managed by [pnpm](https://pnpm.io/). The project aims to be a scarce starting point to be easily transformed into the desired application.
 
