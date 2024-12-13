@@ -12,9 +12,18 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
         .setup(move |app| {
+            // in dev mode open devtools by default
+            #[cfg(debug_assertions)]
+            {
+                use tauri::Manager;
+                let window = app.get_webview_window("main").unwrap();
+                window.open_devtools();
+            }
+
+            // init the python sidecar
             let sidecar_command = app.shell().sidecar("taupy-pyserver").unwrap();
 
-            // add -u flag in dev mode to disable output buffering for immediate print from python
+            // make sidecar aware of dev mode
             #[cfg(debug_assertions)]
             let sidecar_command = sidecar_command.arg("-dev");
 

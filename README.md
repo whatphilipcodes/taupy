@@ -86,3 +86,7 @@ This template is supposed to help with the creation of desktop applications that
     ```bash
     pnpm install
     ````
+
+### Debugging
+Be aware that even though running the standard build command will put some files into the `./src-tauri/target/debug` directory, these artifacts cannot be run.
+To generate an actual usable debug build in that location, run the `debug-build` command first. For more information on debugging in Tauri in general refer to the [tauri docs](https://tauri.app/develop/debug/).
