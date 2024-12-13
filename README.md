@@ -1,9 +1,13 @@
-# TauPy
+<div style="display: flex; align-items: center;">
+  <img src="./public/taupy.svg" alt="logo" width="80" style="transform: translateX(-8%);"/>
+  <h1 style="width: 100%; margin: 0;">TauPy</h1>
+</div>
+
 This template is supposed to help with the creation of desktop applications that rely on a python backend. It uses [tauri](https://tauri.app/) for the main runtime and [react](https://react.dev/) for the frontend. The python environment is managed by [poetry](https://python-poetry.org/) and the frontend packages are managed by [pnpm](https://pnpm.io/). The project aims to be a scarce starting point to be easily transformed into the desired application.
 
 ### Features
 - preset pipelines seamlessly hooking into `tauri dev` and `tauri build`
-- custom port manager to handle dev and build environments
+<!-- - custom port manager to handle dev and build environments -->
 - automatic process shutdown upon exiting the application
 - built-in python env management via poetry
 - easy to understand folder structure
@@ -88,5 +92,8 @@ This template is supposed to help with the creation of desktop applications that
     ````
 
 ### Debugging
-Be aware that even though running the standard build command will put some files into the `./src-tauri/target/debug` directory, these artifacts cannot be run.
+Be aware that even though running the `dev command` will put executable files into the `./src-tauri/target/debug` directory, these artifacts cannot be run.
 To generate an actual usable debug build in that location, run the `debug-build` command first. For more information on debugging in Tauri in general refer to the [tauri docs](https://tauri.app/develop/debug/).
+
+### Security
+As I am only getting started with Tauri and writing desktop applications in general, I cannot guarantee the security of this template. If you find any security issues, please report them in the `issues` section, prefably with a PR attached, and I will do my best to incorporate the changes.
