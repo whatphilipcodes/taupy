@@ -83,7 +83,7 @@ This template is supposed to help with the creation of desktop applications that
     ```bash
     poetry install
     ```
-    dowbload the frontend dependencies
+    download the frontend dependencies
     ```bash
     pnpm install
     ````

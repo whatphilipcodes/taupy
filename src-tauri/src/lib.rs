@@ -25,7 +25,7 @@ pub fn run() {
 
             // make sidecar aware of dev mode
             #[cfg(debug_assertions)]
-            let sidecar_command = sidecar_command.arg("-dev");
+            let sidecar_command = sidecar_command.arg("--dev");
 
             let (mut rx, child) = sidecar_command.spawn().expect("failed to spawn sidecar");
             // store the child in the mutex

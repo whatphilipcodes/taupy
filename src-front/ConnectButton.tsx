@@ -7,7 +7,7 @@ function ConnectButton() {
     const handleConnect = async () => {
         try {
             setIsLoading(true);
-            const response = await fetch('http://localhost:8008/api/v1/connect');
+            const response = await fetch('http://localhost:8000/api/v1/connect');
             const data = await response.text();
             setResult(data);
         } catch (error) {
