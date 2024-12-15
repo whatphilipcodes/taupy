@@ -93,7 +93,7 @@ Be aware that even though running the `dev command` will put executable files in
 To generate an actual usable debug build in that location, run the `debug-build` command first. For more information on debugging in Tauri in general refer to the [tauri docs](https://tauri.app/develop/debug/).
 
 ### Template Sync
-This repo includes an automatic sync workflow based on the [actions-template-sync](https://github.com/marketplace/actions/actions-template-sync). If you don't want to keep your template updated just remove `.github/workflows/template-sync.yml`.
+This repo includes an automatic sync workflow running as a cron job (running once every day at 00:00h per default) based on the [actions-template-sync](https://github.com/marketplace/actions/actions-template-sync). If you don't want to keep your template updated just remove `.github/workflows/template-sync.yml`.
 
 ### Disclaimer
 As I am only getting started with Rust, Tauri and writing desktop applications in general, I cannot guarantee the security of this template. If you find any security issues, please report them in the `issues` section, prefably with a PR attached, and I will do my best to incorporate the changes. Any other suggestions or ideas on how to improve this template are also welcome.
