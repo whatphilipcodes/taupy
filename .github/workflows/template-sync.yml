@@ -13,10 +13,10 @@ jobs:
         pull-requests: write
   
       steps:
-        - name: Checkout
+        - name: checkout
           uses: actions/checkout@v4
   
-        - name: actions-template-sync
+        - name: template sync
           uses: AndreasAugustin/actions-template-sync@v2
           with:
             source_repo_path: whatphilipcodes/taupy
