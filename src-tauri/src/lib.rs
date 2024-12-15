@@ -66,7 +66,7 @@ pub fn run() {
                     .unwrap_or(dev_url.as_str()),
             );
 
-            // print the entire start command to the console in dev
+            // print the start command to the console in dev
             #[cfg(debug_assertions)]
             println!("starting python backend with: {:?}", sidecar_command);
 
