@@ -92,5 +92,5 @@ This template is supposed to help with the creation of desktop applications that
 Be aware that even though running the `dev command` will put executable files into the `./src-tauri/target/debug` directory, these artifacts cannot be run.
 To generate an actual usable debug build in that location, run the `debug-build` command first. For more information on debugging in Tauri in general refer to the [tauri docs](https://tauri.app/develop/debug/).
 
-### Security
-As I am only getting started with Tauri and writing desktop applications in general, I cannot guarantee the security of this template. If you find any security issues, please report them in the `issues` section, prefably with a PR attached, and I will do my best to incorporate the changes.
+### Disclaimer
+As I am only getting started with Rust, Tauri and writing desktop applications in general, I cannot guarantee the security of this template. If you find any security issues, please report them in the `issues` section, prefably with a PR attached, and I will do my best to incorporate the changes. Any other suggestions or ideas on how to improve this template are also welcome.
