@@ -39,7 +39,6 @@ dist-ssr
 .DS_Store
 .idea/*
 .python-version
-.vscode/*
 
 /docs/site/*
 .mypy_cache
