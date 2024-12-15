@@ -1,11 +1,21 @@
 use std::sync::{Arc, Mutex};
 use sysinfo::{Pid, System};
-use tauri::RunEvent;
+use tauri::{Manager, RunEvent};
 use tauri_plugin_shell::process::CommandEvent;
 use tauri_plugin_shell::ShellExt;
 
 mod port_manager;
 use crate::port_manager::PortManager;
+
+#[derive(Clone, serde::Serialize)]
+struct AppData {
+    backend_api_port: u16,
+}
+
+#[tauri::command]
+async fn get_port(state: tauri::State<'_, AppData>) -> Result<u16, ()> {
+    Ok(state.backend_api_port)
+}
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -14,6 +24,7 @@ pub fn run() {
 
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
+        .invoke_handler(tauri::generate_handler![get_port])
         .setup(move |app| {
             // in dev mode open devtools by default
             #[cfg(debug_assertions)]
@@ -32,10 +43,28 @@ pub fn run() {
                 .find_available_port()
                 .expect("no available port found");
             let sidecar_command = sidecar_command.arg("--port").arg(port.to_string());
+            app.manage(AppData {
+                backend_api_port: port,
+            });
 
             // make sidecar aware of dev mode
             #[cfg(debug_assertions)]
             let sidecar_command = sidecar_command.arg("--dev");
+
+            // send devserver url in dev mode
+            let dev_url = app
+                .config()
+                .build
+                .dev_url
+                .clone()
+                .expect("no devURL is set in tauri.conf.json");
+            #[cfg(debug_assertions)]
+            let sidecar_command = sidecar_command.arg("--devurl").arg(
+                dev_url
+                    .as_str()
+                    .strip_suffix("/")
+                    .unwrap_or(dev_url.as_str()),
+            );
 
             // print the entire start command to the console in dev
             #[cfg(debug_assertions)]

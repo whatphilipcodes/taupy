@@ -1,13 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { invoke } from "@tauri-apps/api/core";
 
 function ConnectButton() {
+    const [port, setPort] = useState<number>();
     const [result, setResult] = useState<string>('');
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        invoke<number>('get_port').then(port => {
+            setPort(port);
+        });
+    }, []);
 
     const handleConnect = async () => {
         try {
             setIsLoading(true);
-            const response = await fetch('http://localhost:8000/api/v1/connect');
+            const response = await fetch(`http://localhost:${port}/api/v1/connect`);
             const data = await response.text();
             setResult(data);
         } catch (error) {
