@@ -4,7 +4,7 @@ This template is supposed to help with the creation of desktop applications that
 
 ### Features
 - preset pipelines seamlessly hooking into `tauri dev` and `tauri build`
-<!-- - custom port manager to handle dev and build environments -->
+- custom port manager to handle dev and build environments
 - automatic process shutdown upon exiting the application
 - built-in python env management via poetry
 - easy to understand folder structure

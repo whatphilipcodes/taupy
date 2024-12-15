@@ -4,6 +4,9 @@ use tauri::RunEvent;
 use tauri_plugin_shell::process::CommandEvent;
 use tauri_plugin_shell::ShellExt;
 
+mod port_manager;
+use crate::port_manager::PortManager;
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let child_mutex = Arc::new(Mutex::new(None));
@@ -23,9 +26,20 @@ pub fn run() {
             // init the python sidecar
             let sidecar_command = app.shell().sidecar("taupy-pyserver").unwrap();
 
+            // generate an available port for the python sidecar
+            let port_manager = PortManager::default();
+            let port = port_manager
+                .find_available_port()
+                .expect("no available port found");
+            let sidecar_command = sidecar_command.arg("--port").arg(port.to_string());
+
             // make sidecar aware of dev mode
             #[cfg(debug_assertions)]
             let sidecar_command = sidecar_command.arg("--dev");
+
+            // print the entire start command to the console in dev
+            #[cfg(debug_assertions)]
+            println!("starting python backend with: {:?}", sidecar_command);
 
             let (mut rx, child) = sidecar_command.spawn().expect("failed to spawn sidecar");
             // store the child in the mutex
