@@ -129,8 +129,3 @@ pub fn run() {
             _ => {}
         });
 }
-
-// artifacts
-// .expect("error while building tauri application")
-// .run(context)
-// .expect("error while running tauri application");
