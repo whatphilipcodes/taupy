@@ -52,9 +52,12 @@ pub fn run() {
             }
 
             // init the python sidecar
-            let sidecar_command = app.shell().sidecar("taupy-pyserver").unwrap();
-
-            let sidecar_command = sidecar_command.arg("--port").arg(port.to_string());
+            let sidecar_command = app
+                .shell()
+                .sidecar("taupy-pyserver")
+                .unwrap()
+                .arg("--port")
+                .arg(port.to_string());
             app.manage(AppData {
                 backend_api_port: port,
             });
