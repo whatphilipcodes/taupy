@@ -18,7 +18,7 @@
       }
     ],
     "security": {
-      "csp": "default-src 'self'"
+      "csp": "default-src 'self'; connect-src 'self' ipc://localhost http://localhost:*"
     }
   },
   "bundle": {
