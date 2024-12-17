@@ -36,8 +36,8 @@ This template is supposed to help with the creation of desktop applications that
     ```
     for windows use [scoop](https://scoop.sh/)
     ```bash
-    scoop install main/nodejs-lts
-    scoop install nodejs-lts pnpm
+    scoop install main/nodejs
+    scoop install nodejs pnpm
     ```
 
 
@@ -49,7 +49,8 @@ This template is supposed to help with the creation of desktop applications that
     ```
     for windows use [scoop](https://scoop.sh/)
     ```bash
-    scoop install python@3.12
+    scoop bucket add versions
+    scoop install versions/python312
     ```
 
 - **poetry (py env management)**
@@ -65,7 +66,7 @@ This template is supposed to help with the creation of desktop applications that
     ```
     for windows use [scoop](https://scoop.sh/)
     ```bash
-    scoop install pipx
+    scoop install main/pipx
     pipx ensurepath
     ```
 

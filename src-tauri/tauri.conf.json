@@ -6,7 +6,7 @@
   "build": {
     "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "pnpm build && ln -sfn './src-tauri/target' './dist-full'",
+    "beforeBuildCommand": "pnpm build && node .build/create-symlink",
     "frontendDist": "../dist-front"
   },
   "app": {
