@@ -1,2 +1,23 @@
-.github/workflows/template-sync.yml
+# Repo
 README.md
+.github/workflows/template-sync.yml
+pnpm-lock.yaml
+package.json
+LICENSE
+
+# Assets
+public
+
+# Frontend
+src-front/*
+!src-front/main.tsx
+!src-front/vite-env.d.ts
+
+# Backend
+src-back/*
+pyproject.toml
+poetry.lock
+
+# Tauri
+src-tauri/icons
+src-tauri/tauri.conf.json
