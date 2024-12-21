@@ -1,12 +1,12 @@
 use std::sync::{Arc, Mutex};
 use sysinfo::{Pid, System};
-use tauri::utils::config::Csp;
 use tauri::{Manager, RunEvent};
 use tauri_plugin_shell::process::CommandEvent;
 use tauri_plugin_shell::ShellExt;
 
-mod port_manager;
-use crate::port_manager::PortManager;
+mod py_api;
+use crate::py_api::ContentSecurity;
+use crate::py_api::PortManager;
 
 #[derive(Clone, serde::Serialize)]
 struct AppData {
@@ -20,7 +20,10 @@ async fn get_port(state: tauri::State<'_, AppData>) -> Result<u16, ()> {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    // child process mutex
+    // access the app context
+    let mut context: tauri::Context<tauri::Wry> = tauri::generate_context!();
+
+    // store the child process to be able to kill it upon exit
     let child_mutex = Arc::new(Mutex::new(None));
     let child_mutex_clone = child_mutex.clone();
 
@@ -30,15 +33,13 @@ pub fn run() {
         .find_available_port()
         .expect("no available port found");
 
-    // dynamic csp setup
-    let mut context: tauri::Context<tauri::Wry> = tauri::generate_context!();
-    // update csp using this: https://github.com/tauri-apps/tauri/issues/3533#issuecomment-2489166275
-    let csp = format!(
-        "default-src 'self'; connect-src 'self' ipc://localhost/get_port http://localhost:{}",
-        port
+    // define and apply csp
+    let csp_manager = ContentSecurity::new(
+        format!("default-src 'self'; connect-src 'self' ipc://localhost http://icp.localhost http://localhost:{}", port)
     );
-    context.config_mut().app.security.csp = Some(Csp::Policy(csp));
+    context.config_mut().app.security.csp = csp_manager.policy;
 
+    // tauri lifecycle
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
         .invoke_handler(tauri::generate_handler![get_port])
