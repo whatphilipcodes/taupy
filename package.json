@@ -13,8 +13,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "tauri": "tauri",
-    "pyinstall": "poetry run pyinstaller --distpath ./dist-back/ --workpath ./build-py/ src-back/install.spec",
-    "debug-build": "tauri build --debug"
+    "pyinstall": "poetry run pyinstaller --distpath ./dist-back/ --workpath ./build-py/ src-back/install.spec"
   },
   "dependencies": {
     "@tauri-apps/api": "^2",
