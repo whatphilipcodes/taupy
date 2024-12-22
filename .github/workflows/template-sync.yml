@@ -1,7 +1,4 @@
 on:
-    # runs every day at midnight as default
-    schedule:
-    - cron: "0 0 * * *"
     # manual trigger
     workflow_dispatch:
 
