@@ -7,6 +7,8 @@
     "ms-python.debugpy",
     "ms-python.python",
     "ms-python.vscode-pylance",
-    "yoavbls.pretty-ts-errors"
+    "yoavbls.pretty-ts-errors",
+    "bradlc.vscode-tailwindcss",
+    "esbenp.prettier-vscode"
   ]
 }
