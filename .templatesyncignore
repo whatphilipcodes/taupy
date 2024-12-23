@@ -1,23 +1,18 @@
-# Repo
+# repo
+LICENSE
 README.md
 .github/workflows/template-sync.yml
-pnpm-lock.yaml
-package.json
-LICENSE
 
-# Assets
+# assets
 public
+src-tauri/icons
 
-# Frontend
+# frontend
 src-front/*
 !src-front/main.tsx
 !src-front/vite-env.d.ts
 
-# Backend
+# backend
 src-back/*
-pyproject.toml
-poetry.lock
-
-# Tauri
-src-tauri/icons
-src-tauri/tauri.conf.json
+!src-back/pyserver
+!src-back/install.spec
