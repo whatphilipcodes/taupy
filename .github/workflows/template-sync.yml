@@ -1,24 +1,28 @@
 on:
-    # manual trigger
-    workflow_dispatch:
+  # enable this if you want to periodically sync the template
+  # schedule:
+  #   - cron: '0 0 * * *'
+
+  # manual trigger
+  workflow_dispatch:
 
 jobs:
-    repo-sync:
-      runs-on: ubuntu-latest
-      permissions:
-        contents: write
-        pull-requests: write
-  
-      steps:
-        - name: checkout
-          uses: actions/checkout@v4
-  
-        - name: template sync
-          uses: AndreasAugustin/actions-template-sync@v2
-          with:
-            source_repo_path: whatphilipcodes/taupy
-            pr_branch_name_prefix: template-sync
-            pr_title: sync template
-            pr_body: merge ${SOURCE_REPO} ${TEMPLATE_GIT_HASH}
-            pr_commit_msg: 'up: merge template changes'
-            pr_labels: 'template-sync'
+  repo-sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: template sync
+        uses: AndreasAugustin/actions-template-sync@v2
+        with:
+          source_repo_path: whatphilipcodes/taupy
+          pr_branch_name_prefix: template-sync
+          pr_title: sync template
+          pr_body: merge ${SOURCE_REPO} ${TEMPLATE_GIT_HASH}
+          pr_commit_msg: 'up: merge template changes'
+          pr_labels: 'template-sync'
