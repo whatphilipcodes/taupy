@@ -21,6 +21,7 @@ async fn get_port(state: tauri::State<'_, AppData>) -> Result<u16, ()> {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     // access the app context
+    #[cfg(not(feature = "ignore"))]
     let mut context: tauri::Context<tauri::Wry> = tauri::generate_context!();
 
     // store the child process to be able to kill it upon exit
