@@ -35,7 +35,7 @@ pub fn run() {
 
     // define and apply csp
     let csp_manager = ContentSecurity::new(
-        format!("default-src 'self'; connect-src 'self' ipc://localhost http://icp.localhost http://localhost:{}", port)
+        format!("default-src 'self'; connect-src 'self' ipc://localhost http://ipc.localhost http://localhost:{}", port)
     );
     context.config_mut().app.security.csp = csp_manager.policy;
 

@@ -19,7 +19,7 @@ impl Default for ContentSecurity {
     fn default() -> Self {
         ContentSecurity {
             policy: Some(Csp::Policy(
-                "default-src 'self'; connect-src 'self' ipc://localhost http://icp.localhost http://localhost"
+                "default-src 'self'; connect-src 'self' ipc://localhost http://ipc.localhost http://localhost"
                     .to_string(),
             )),
         }
