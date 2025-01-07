@@ -47,7 +47,7 @@ def parse_arguments() -> CommandLineArgs:
 
 
 args = parse_arguments()
-cors_origins = ["tauri://localhost"]
+cors_origins = ["tauri://localhost", "http://tauri.localhost"]
 
 if args.dev:
     # Enable immediate prints in dev mode
