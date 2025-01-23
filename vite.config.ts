@@ -1,6 +1,8 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
 import { spawnSync } from 'child_process';
+
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 
 // using this plugin instead of adding the command to the tauri config prevents ecycle error in dev mode
 const runPyInstall = () => {
@@ -8,7 +10,7 @@ const runPyInstall = () => {
     name: 'run-pyinstall',
     buildStart() {
       spawnSync('pnpm', ['pyinstall'], { stdio: 'inherit' });
-    }
+    },
   };
 };
 
@@ -16,7 +18,7 @@ const host = process.env.TAURI_DEV_HOST;
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
-  plugins: [runPyInstall(), react()],
+  plugins: [runPyInstall(), tailwindcss(), react()],
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   //
@@ -29,18 +31,18 @@ export default defineConfig(async () => ({
     host: host || false,
     hmr: host
       ? {
-        protocol: "ws",
-        host,
-        port: 1421,
-      }
+          protocol: 'ws',
+          host,
+          port: 1421,
+        }
       : undefined,
     watch: {
       // 3. tell vite to ignore watching `src-tauri`
-      ignored: ["**/src-tauri/**"],
+      ignored: ['**/src-tauri/**'],
     },
   },
 
   build: {
-    outDir: "./dist-front"
-  }
+    outDir: './dist-front',
+  },
 }));
