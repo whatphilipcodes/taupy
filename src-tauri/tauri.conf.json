@@ -4,9 +4,10 @@
   "version": "0.1.0",
   "identifier": "com.taupy.app",
   "build": {
-    "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "pnpm build && node .build/create-symlink",
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build",
+    "beforeBundleCommand": "node .build/create-symlink 'dist-full' 'src-tauri/target'",
     "frontendDist": "../dist-front"
   },
   "app": {
@@ -31,8 +32,6 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ],
-    "externalBin": [
-      "../dist-back/taupy-pyserver"
-    ]
+    "externalBin": ["../dist-back/taupy-pyserver"]
   }
 }

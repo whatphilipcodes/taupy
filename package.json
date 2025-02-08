@@ -5,7 +5,7 @@
   "type": "module",
   "engines": {
     "node": ">=23",
-    "pnpm": ">=9"
+    "pnpm": ">=10"
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
@@ -23,17 +23,18 @@
     "symlink-dir": "^6.0.4"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^2.2.2",
-    "@types/node": "^22.10.5",
+    "@tailwindcss/vite": "^4.0.4",
+    "@tauri-apps/cli": "^2.2.7",
+    "@types/node": "^22.13.1",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.49",
     "prettier": "3.4.2",
-    "prettier-plugin-tailwindcss": "^0.6.9",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5.7.2",
-    "vite": "^5.4.11"
-  }
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "tailwindcss": "^4.0.4",
+    "typescript": "^5.7.3",
+    "vite": "^5.4.14"
+  },
+  "packageManager": "pnpm@10.2.1+sha512.398035c7bd696d0ba0b10a688ed558285329d27ea994804a52bad9167d8e3a72bcb993f9699585d3ca25779ac64949ef422757a6c31102c12ab932e5cbe5cc92"
 }
