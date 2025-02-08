@@ -13,9 +13,9 @@ with open("metadata.json", "r") as f:
         metadata = json.load(f)
         app_name = metadata.get("backend_identifier")
     except Exception as e:
-        raise RuntimeError("Failed get backend_identifer from metadata.json") from e
+        raise RuntimeError("Failed get backend_identifier from metadata.json") from e
 
-### target triple aquirement
+### target triple acquiring
 try:
     rustc_output = subprocess.check_output(["rustc", "-vV"], text=True)
     target_triple = next(
