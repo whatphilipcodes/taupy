@@ -12,8 +12,10 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri",
-    "pyinstall": "poetry run pyinstaller --distpath ./dist-back/ --workpath ./build-py/ src-back/install.spec"
+    "tauri": "pnpm metasync && pnpm link-dist && tauri",
+    "pyinstall": "poetry run pyinstaller --distpath ./dist-back/ --workpath ./build-py/ src-back/install.spec",
+    "metasync": "node .build/sync-metadata",
+    "link-dist": "node .build/create-symlink 'dist-full' 'src-tauri/target'"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.2.0",
@@ -23,6 +25,7 @@
     "symlink-dir": "^6.0.4"
   },
   "devDependencies": {
+    "@iarna/toml": "^2.2.5",
     "@tailwindcss/vite": "^4.0.4",
     "@tauri-apps/cli": "^2.2.7",
     "@types/node": "^22.13.1",

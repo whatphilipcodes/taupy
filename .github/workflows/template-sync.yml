@@ -1,3 +1,4 @@
+name: template-sync
 on:
   # enable this if you want to periodically sync the template
   # schedule:
