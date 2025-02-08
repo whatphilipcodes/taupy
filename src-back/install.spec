@@ -1,19 +1,32 @@
 # -*- mode: python ; coding: utf-8 -*-
 import os
 import subprocess
+import json
 
 from PyInstaller.utils.hooks import collect_dynamic_libs
 from PyInstaller.utils.hooks import collect_data_files
 from PyInstaller.utils.hooks import copy_metadata
 
+# Read metadata.json
+with open("metadata.json", "r") as f:
+    try:
+        metadata = json.load(f)
+        app_name = metadata.get("backend_identifier")
+    except Exception as e:
+        raise RuntimeError("Failed get backend_identifer from metadata.json") from e
+
 ### target triple aquirement
 try:
-    rustc_output = subprocess.check_output(['rustc', '-vV'], text=True)
-    target_triple = next(line.split(': ')[1] for line in rustc_output.splitlines() if line.startswith('host'))
+    rustc_output = subprocess.check_output(["rustc", "-vV"], text=True)
+    target_triple = next(
+        line.split(": ")[1]
+        for line in rustc_output.splitlines()
+        if line.startswith("host")
+    )
 except Exception as e:
     raise RuntimeError("Failed to determine target triple") from e
 
-output_name = f"taupy-pyserver-{target_triple}"
+output_name = f"{app_name}-{target_triple}"
 
 ### collect python
 datas = []
@@ -23,7 +36,7 @@ hiddenimports = []
 block_cipher = None
 
 a = Analysis(
-    ['pyserver/main.py'],
+    ["pyserver/main.py"],
     pathex=[],
     binaries=binaries,
     datas=datas,
