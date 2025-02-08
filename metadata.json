@@ -1,0 +1,11 @@
+{
+  "name": "taupy",
+  "backend_identifier": "taupy-pyserver",
+  "bundle_identifier": "com.taupy.app",
+  "version": "0.1.0",
+  "authors": ["whatphilipcodes <gerdes.philip@gmail.com>"],
+  "description": "Tauri App with Python backend",
+  "repository": "https://github.com/whatphilipcodes/taupy",
+  "readme": "README.md",
+  "license": "MIT"
+}

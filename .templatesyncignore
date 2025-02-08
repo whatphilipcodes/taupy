@@ -2,6 +2,7 @@
 LICENSE
 README.md
 .github/workflows/template-sync.yml
+metadata.json
 
 # assets
 public

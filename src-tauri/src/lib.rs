@@ -4,6 +4,9 @@ use tauri::{Manager, RunEvent};
 use tauri_plugin_shell::process::CommandEvent;
 use tauri_plugin_shell::ShellExt;
 
+mod constants;
+use constants::Metadata;
+
 mod py_api;
 use crate::py_api::ContentSecurity;
 use crate::py_api::PortManager;
@@ -54,9 +57,10 @@ pub fn run() {
             }
 
             // init the python sidecar
+            let metadata = Metadata::load();
             let sidecar_command = app
                 .shell()
-                .sidecar("taupy-pyserver")
+                .sidecar(metadata.backend_identifier)
                 .unwrap()
                 .arg("--port")
                 .arg(port.to_string());
